@@ -20,13 +20,17 @@ Start by cloning this repo
 
 `git clone https://github.com/cloudera/dbt-impala-example.git`
 
-Next install the requirements
+Next install the requirements by running the following:
 
-`pip install -r requirements.txt`
+Option 1: 
+`pip3 install -r requirements.txt`
+
+Option 2:
+./cdsw-build.sh
 
 ## Configure
 
-Create a dbt profile in `~/.dbt/profiles.yml`
+Go to profile in `~/.dbt/profiles.yml`
 
 For a Cloudera Data Platform cluster (CDW or DataHub), it should look like this:
 
@@ -35,16 +39,16 @@ dbt_impala_demo:
   outputs:
     dev:
      type: impala
-     host: <impala host>
-     port: <impala port>
-     dbname: <db name>
-     schema: <db name>
-     user: <user>
-     password: <password>
+     host: coordinator-default-impala.dw-go02-demo-aws.ylcu-atmi.cloudera.site
+     port: 443
+     dbname: xx_dbt_demo  <- change the "xx" to your initials
+     schema: xx_dbt_demo  <- change the "xx" to your initials
+     user: xx     <- add your username
+     password: xx <- add your workload password 
      auth_type: ldap
      use_http_transport: true
      use_ssl: true
-     http_path: <http path>
+     http_path: cliservice
   target: dev
 ```
 
@@ -55,18 +59,36 @@ To generate fake data, we must first add our Impala details to `util/data_gen/wr
 
 Modify the following section to reflect your environment:
 
-```
 impala_conf = {
-    'host': '',
-    'port': '',
-    'user': '',
-    'password': '!',
+    'host': 'coordinator-default-impala.dw-go02-demo-aws.ylcu-atmi.cloudera.site',
+    'port': '443',
+    'user': 'xx',     <- change "xx" to your username
+    'password': 'xx', <- change "xx" to your password
     'auth_mechanism': 'ldap',
     'use_ssl': True,
     'use_http_transport': True,
-    'http_path': ''
+    'http_path': 'cliservice'
 }
+
+# Add initials  
+initials = 'xx'   <- change "xx" to your initials
 ```
+
+## Modify a test in dbt_impala_demo/models/raw/covid/raw_covid.yml
+
+
+sources:
+   name: raw_covid
+    schema: xx_dbt_demo_raw_covid <- change "xx" to your initials
+    tables:
+      - name: raw_covid__vaccines
+      - name: raw_covid__cases
+          tests:
+           - not_null
+           - length:
+               len: 2
+
+
 
 Next, move to the `util/data_gen` directory
 
