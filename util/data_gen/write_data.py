@@ -34,15 +34,18 @@ data_path = str(Path(__file__).resolve().parent)+'/data/'
 # Connection properties for Impala
 # Customise to your environment
 impala_conf = {
-    'host': '',
-    'port': '',
-    'user': '',
-    'password': '!',
+    'host': 'coordinator-default-impala.dw-go02-demo-aws.ylcu-atmi.cloudera.site',
+    'port': '443',
+    'user': 'xx',
+    'password': 'xx',
     'auth_mechanism': 'ldap',
     'use_ssl': True,
     'use_http_transport': True,
-    'http_path': ''
+    'http_path': 'cliservice'
 }
+
+# Add initials 
+initials = 'xx'
 
 # Builds of a string of values to be used in the INSERT
 # Returns: STRING
@@ -131,7 +134,7 @@ def create_cnx():
 conn = create_cnx()
 
 write_file_to_impala(data_path+'raw_covid__cases.csv',
-                     'dbt_demo_raw_covid', 'raw_covid__cases')
+                     initials+'dbt_demo_raw_covid', 'raw_covid__cases')
 
 write_file_to_impala(data_path+'raw_covid__vaccines.csv',
-                     'dbt_demo_raw_covid', 'raw_covid__vaccines')
+                     initials+'dbt_demo_raw_covid', 'raw_covid__vaccines')
