@@ -16,9 +16,10 @@ dbt-impala >= 1.0.1
 
 impyla
 ## Install
-Start by cloning this repo
+Start by creating a new project in CML.
+Use the folowing git repository:
 
-`git clone https://github.com/cloudera/dbt-impala-example.git`
+`git@github.com:gregkosi/dbt-impala-example.git`
 
 Next install the requirements by running the following:
 
@@ -26,7 +27,9 @@ Option 1:
 `pip3 install -r requirements.txt`
 
 Option 2:
-./cdsw-build.sh
+`./cdsw-build.sh`
+
+in your home folder /home/cdsw/
 
 ## Configure
 
@@ -41,10 +44,10 @@ dbt_impala_demo:
      type: impala
      host: coordinator-default-impala.dw-go02-demo-aws.ylcu-atmi.cloudera.site
      port: 443
-     dbname: xx_dbt_demo  <- change the "xx" to your initials
-     schema: xx_dbt_demo  <- change the "xx" to your initials
-     user: xx     <- add your username
-     password: xx <- add your workload password 
+     dbname: xx_dbt_demo  <- change the "xx" to your initials lower cases
+     schema: xx_dbt_demo  <- change the "xx" to your initials lower cases
+     user: xx     <- add your CDP username
+     password: xx <- add your CDP workload password 
      auth_type: ldap
      use_http_transport: true
      use_ssl: true
@@ -58,12 +61,12 @@ Test the profile  with `dbt debug`
 To generate fake data, we must first add our Impala details to `util/data_gen/write_data.py`
 
 Modify the following section to reflect your environment:
-
+```
 impala_conf = {
     'host': 'coordinator-default-impala.dw-go02-demo-aws.ylcu-atmi.cloudera.site',
     'port': '443',
-    'user': 'xx',     <- change "xx" to your username
-    'password': 'xx', <- change "xx" to your password
+    'user': 'xx',     <- change "xx" to your CDP username
+    'password': 'xx', <- change "xx" to your CDP workload password
     'auth_mechanism': 'ldap',
     'use_ssl': True,
     'use_http_transport': True,
@@ -71,15 +74,15 @@ impala_conf = {
 }
 
 # Add initials  
-initials = 'xx'   <- change "xx" to your initials
+initials = 'xx'   <- change "xx" to your initials lower cases
 ```
 
 ## Modify a test in dbt_impala_demo/models/raw/covid/raw_covid.yml
 
-
+```
 sources:
    name: raw_covid
-    schema: xx_dbt_demo_raw_covid <- change "xx" to your initials
+    schema: xx_dbt_demo_raw_covid <- change "xx" to your initials lower cases
     tables:
       - name: raw_covid__vaccines
       - name: raw_covid__cases
@@ -87,7 +90,7 @@ sources:
            - not_null
            - length:
                len: 2
-
+```
 
 
 Next, move to the `util/data_gen` directory
@@ -99,7 +102,9 @@ Run the `start.sh` helper to generate the first set of fake data
 `./start.sh 1`
 
 This generates 2 days of fake data for the dates 01/01/2022 and 02/01/2022 and writes it to Impala.
-It will create a database `dbt_demo_raw_covid` with 2 tables.
+It will create a database `xx_dbt_demo_raw_covid` with 2 tables.
+
+Where xx are your initials. 
 
 ## Using dbt
 With our fake data loaded, we can start using dbt.
