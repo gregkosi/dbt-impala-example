@@ -1,0 +1,15 @@
+dbt_impala_demo: 
+ target: dev
+ outputs:
+   dev:
+    type: impala
+    host: coordinator-default-impala.dw-go02-demo-aws.ylcu-atmi.cloudera.site
+    port: 443
+    dbname: xx_dbt_demo
+    schema: xx_dbt_demo
+    user: xxxx
+    password: xxxxx
+    auth_type: ldap
+    use_http_transport: true
+    use_ssl: true
+    http_path: cliservice
