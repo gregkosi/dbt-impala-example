@@ -168,6 +168,28 @@ You should now have the following databases & tables:
 
 In the raw, staging and mart tables, you should see 2 days worth of data for the dates 01/01/2022 and 02/01/2022.
 
+Usefull SQL queries:
+
+```
+--- Row data ----
+select * from xx_dbt_demo_raw_covid.raw_covid__cases;
+select * from xx_dbt_demo_raw_covid.raw_covid__vaccines;
+select date_rep from xx_dbt_demo_raw_covid.raw_covid__cases group by date_rep;
+select year_week_iso from xx_dbt_demo_raw_covid.raw_covid__vaccines group by year_week_iso;
+
+---- staging Data ----
+select * from xx_dbt_demo_staging_covid.stg_covid__cases;
+select date_rep from xx_dbt_demo_staging_covid.stg_covid__cases group by date_rep;
+
+---- Mart data ----
+select * from xx_dbt_demo_mart_covid.covid_cases;
+select report_date from xx_dbt_demo_mart_covid.covid_cases group by report_date;
+show create table xx_dbt_demo_mart_covid.covid_cases;
+show partitions xx_dbt_demo_mart_covid.covid_cases;
+```
+
+
+
 ### Generate more fake data
 To demonstrate how we can handle new data arriving, let's generate some more data.
 
@@ -193,3 +215,14 @@ Run the models again with
 This will trigger the incremental update of the mart model, by selecting only the days that are later than the maximum date we already have (our current maximum is 02/01/2022, so it will only select the dates 03/01/2022 and 04/01/2022).
 
 When complete, review the `mart_covid.covid_cases` tables and you should see that you now have 4 days worth of data here.
+
+Usefull SQL queries:
+
+```
+---- Mart data ----
+select * from xx_dbt_demo_mart_covid.covid_cases;
+select report_date from xx_dbt_demo_mart_covid.covid_cases group by report_date;
+show create table xx_dbt_demo_mart_covid.covid_cases;
+show partitions xx_dbt_demo_mart_covid.covid_cases;
+```
+
