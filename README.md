@@ -226,3 +226,14 @@ show create table xx_dbt_demo_mart_covid.covid_cases;
 show partitions xx_dbt_demo_mart_covid.covid_cases;
 ```
 
+### Post workshop cleaning. 
+
+Warnning! Pls make sure you replaced the "xx" with your initials. 
+
+```
+------- DB environment cleaning --------
+drop database xx_dbt_demo_mart_covid cascade;
+drop database xx_dbt_demo_raw_covid cascade;
+drop database xx_dbt_demo_reference cascade;
+drop database xx_dbt_demo_staging_covid cascade;
+```
