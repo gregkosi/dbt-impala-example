@@ -19,7 +19,7 @@ impyla
 Start by creating a new project in CML.
 Use the folowing git repository:
 
-`git@github.com:gregkosi/dbt-impala-example.git`
+`https://github.com/gregkosi/dbt-impala-example.git`
 
 Next install the requirements by running the following:
 
