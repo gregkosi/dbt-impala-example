@@ -134,7 +134,7 @@ def create_cnx():
 conn = create_cnx()
 
 write_file_to_impala(data_path+'raw_covid__cases.csv',
-                     initials+'dbt_demo_raw_covid', 'raw_covid__cases')
+                     initials+'_dbt_demo_raw_covid', 'raw_covid__cases')
 
 write_file_to_impala(data_path+'raw_covid__vaccines.csv',
-                     initials+'dbt_demo_raw_covid', 'raw_covid__vaccines')
+                     initials+'_dbt_demo_raw_covid', 'raw_covid__vaccines')
