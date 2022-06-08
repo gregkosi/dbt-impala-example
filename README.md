@@ -8,7 +8,8 @@ This directory is a [dbt project](https://docs.getdbt.com/docs/building-a-dbt-pr
 This directory contains some utilities for generating fake data.
 
 # Getting started
-It is recommended to use `venv` to create a Python virtual environment for the demo.
+It is recommended to use CDP CML.
+
 ## Requirements
 dbt >= 1.0.1
 
@@ -17,6 +18,7 @@ dbt-impala >= 1.0.1
 impyla
 ## Install
 Start by creating a new project in CML.
+
 Use the folowing git repository:
 
 `https://github.com/gregkosi/dbt-impala-example.git`
